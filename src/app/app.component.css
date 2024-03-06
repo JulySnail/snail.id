@@ -1,0 +1,89 @@
+body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+.container {
+    display: flex;
+    background-color: #ece8df;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .left {
+    flex: 1;
+    height: 100%;
+    width: 60%;
+  }
+
+  .top-left {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 50%;
+  }
+
+  .bottom-left {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 50%;
+  }
+
+  .content {
+    flex: 1;
+    height: 100%;
+    width: 40%;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+  }
+
+  .menu {
+    position: absolute;
+    top: 15%;
+    left: 8%;
+  }
+
+  .name-container {
+    flex: 1;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 82px;
+    font-weight: bold;
+    bottom: 0;
+  }
+  
+  .link {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 18px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .image {
+    height: 80%;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 5%;
+    right: 15%;
+  }
+
+  .name {
+    flex: 1;
+    position: absolute;
+    bottom: 5%;
+    left: 8%;
+  }
+  
+  .text {
+    margin-top: auto; /* Pushes 'Text' to the bottom */
+  }
