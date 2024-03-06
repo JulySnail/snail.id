@@ -37,6 +37,7 @@ body, html {
 
   .content {
     flex: 1;
+    display: block;
     height: 100%;
     width: 40%;
     padding: 20px;
@@ -86,4 +87,10 @@ body, html {
   
   .text {
     margin-top: auto; /* Pushes 'Text' to the bottom */
+  }
+
+  @media (max-width: 767px) {
+    .content {
+      display: none; /* Hide the element on mobile */
+    }
   }
