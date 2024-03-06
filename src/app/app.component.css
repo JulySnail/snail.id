@@ -1,0 +1,61 @@
+body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+.container {
+    display: flex;
+    background-color: #f7f3e9; /* Light cream background */
+    width: 100%; /* Take up full width of the screen */
+    height: 100vh; /* Take up full height of the viewport */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    box-sizing: border-box;
+  }
+  
+  .link {
+    margin-top: 20px; /* Adjust as needed */
+    margin-left: 20px; /* Adjust as needed */
+    font-size: 18px; /* Adjust as needed */
+    font-family: Helvetica, Arial, sans-serif; /* Specify Helvetica font */
+    font-weight: bold; /* Apply bold font weight similar to h1 */
+    text-decoration: none;
+    color: black;
+  }
+  
+  .content {
+    flex: 1;
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    float: left; /* Align the image to the left */
+    margin-right: 10px; /* Add some margin to separate the image from other content (optional) */
+  }
+
+  .left-section {
+    flex: 1;
+    width: 60%;
+  }
+  
+  .links {
+    height: 50%;
+  }
+  
+  .name-container {
+    height: 50%;
+    flex: 1;
+    font-family: Helvetica, Arial, sans-serif; /* Specify Helvetica font */
+    font-size: 82px; /* Adjust font size as needed */
+    font-weight: bold; /* Apply bold font weight similar to h1 */
+  }
+  
+  .image {
+    width: 30%; /* Adjust as needed */
+    border-radius: 20px; /* Rounded corners */
+  }
+  
+  .text {
+    margin-top: auto; /* Pushes 'Text' to the bottom */
+  }
