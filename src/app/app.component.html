@@ -1,22 +1,20 @@
 <div class="container">
   <div class="left">
-    <div class="top-left">
-      <div class="menu">
-        <p><a href="{{ linkedinLink }}" class="link">linkedin</a></p>
-        <p><a href="{{ githubLink }}" class="link">github</a></p>
-      </div>
-    </div>
-    <div class="bottom-left">
-      <div class="name-container">
-        <!-- Text -->
-        <p class="name">Matilda Snail</p>
-      </div>
-    </div>
-  </div>
-  <div class="content">
-      <!-- Image with rounded corners -->
     <img src="assets\images\IMG_5038.png" alt="Image" class="image">
   </div>
+    
+  
+  <div class="content">
+      <!-- Image with rounded corners -->
+      <div *ngIf="showHomeComponent">
+        <div class="home">
+          <app-home></app-home>
+        </div>
+      </div>
+  </div>
+
 </div>
 
-<router-outlet />
+
+<p><a href="{{ linkedinLink }}" class="link">linkedin</a></p>
+<p><a href="{{ githubLink }}" class="link">github</a></p>
