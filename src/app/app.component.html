@@ -2,14 +2,20 @@
   <div class="left">
     <div class="top-left">
       <div class="menu">
-        <p><a href="{{ linkedinLink }}" class="link">linkedin</a></p>
-        <p><a href="{{ githubLink }}" class="link">github</a></p>
+        <router-outlet><a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="toggleAboutComponent()" class="link">About</a></router-outlet>
+        <div *ngIf="showAboutComponent">
+          <app-about></app-about>
+        </div>
+        <div *ngIf!="showAboutComponent">
+          <p><a href="{{ linkedinLink }}" class="link">linkedin</a></p>
+          <p><a href="{{ githubLink }}" class="link">github</a></p>
+        </div>
       </div>
     </div>
     <div class="bottom-left">
       <div class="name-container">
         <!-- Text -->
-        <p class="name">Matilda Snail</p>
+        <router-outlet><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="toggleAboutComponent()" class="name">Matilda Snail</a></router-outlet>
       </div>
     </div>
   </div>
@@ -18,5 +24,3 @@
     <img src="assets\images\IMG_5038.png" alt="Image" class="image">
   </div>
 </div>
-
-<router-outlet />
