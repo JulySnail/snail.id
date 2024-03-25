@@ -42,7 +42,7 @@
 
   .menu {
     position: absolute;
-    top: 15%;
+    top: 35%;
     left: 8%;
   }
 
@@ -65,7 +65,7 @@
   }
   
   .image {
-    height: 80%;
+    height: 60%;
     border-radius: 20px;
     position: absolute;
     bottom: 5%;
@@ -85,6 +85,10 @@
 
   @media (max-width: 767px) {
     .content {
-      display: none; /* Hide the element on mobile */
+      display: none;
+    }
+    
+    .menu {
+      top: 10%;
     }
   }
