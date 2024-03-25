@@ -32,7 +32,6 @@
   .content {
     flex: 1;
     display: block;
-
     width: 40%;
     padding: 20px;
     flex-direction: column;
