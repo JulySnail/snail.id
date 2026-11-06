@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import SpecimenCards from '../../components/SpecimenCards.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.fig - b.data.fig);
+---
+<Base title="Catalog — snail.id" description="Projects by Matilda Snail.">
+  <div class="paper sheet">
+    <header class="wrap mono top">
+      <a href="/">← Back to the field guide</a>
+      <span class="count">{projects.length} specimens</span>
+    </header>
+    <div class="wrap intro">
+      <h1 class="heading">Catalog</h1>
+      <p class="sub">Observed specimens: projects, builds and experiments.</p>
+    </div>
+  </div>
+
+  <section class="specimens">
+    <div class="wrap">
+      <SpecimenCards projects={projects} />
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap mono foot-row">
+      <span>snail.id</span>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .sheet { padding-bottom: 64px; }
+  .top { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-block: 12px; }
+  .top a { text-decoration: none; padding-block: 8px; }
+  .top a:hover { color: var(--orange-text); }
+  .count { color: var(--orange-text); }
+  .intro { padding-top: 48px; }
+  .intro h1 { font-size: clamp(52px, 8vw, 96px); }
+  .sub { margin: 16px 0 0; font-size: 20px; line-height: 1.5; }
+  .specimens { background: var(--slate); color: var(--cream); padding: 24px 0 96px; }
+  .foot { background: var(--slate); color: var(--cream); border-top: 1px solid rgba(235, 217, 153, 0.25); }
+  .foot-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding-block: 28px 40px; }
+</style>
