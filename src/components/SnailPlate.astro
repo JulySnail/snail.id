@@ -1,0 +1,49 @@
+---
+// Fig. 1: the field-guide snail illustration with labeled callouts.
+---
+<figure class="plate">
+  <div class="plate-frame">
+    <svg viewBox="0 0 400 500" role="img" aria-label="Field guide illustration of a snail with labeled shell, eyestalks and foot">
+      <g fill="none" stroke="#3e4144" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M44 392 Q52 372 104 370 L284 362 Q318 352 326 312 Q332 286 350 284 Q372 286 370 318 Q366 360 342 386 Q318 404 276 406 L84 410 Q44 410 44 392 Z" fill="#ebd999" stroke-width="4" />
+        <path d="M90 392 L120 390 M140 394 L176 392 M196 396 L236 393 M256 395 L290 390" stroke-width="2" opacity="0.6" />
+        <path d="M343 288 Q336 250 326 214" stroke-width="4" />
+        <path d="M358 289 Q366 252 380 222" stroke-width="4" />
+        <circle cx="325" cy="210" r="7" fill="#3e4144" />
+        <circle cx="381" cy="218" r="7" fill="#3e4144" />
+        <path d="M364 322 Q376 322 388 330" stroke-width="3" />
+        <circle cx="206" cy="252" r="112" fill="#ebd999" stroke-width="4" />
+        <g transform="translate(194 252) scale(1.5)">
+          <path d="M0 0 a8 8 0 0 1 16 0 a16 16 0 0 1 -32 0 a24 24 0 0 1 48 0 a32 32 0 0 1 -64 0 a40 40 0 0 1 80 0 a48 48 0 0 1 -96 0 a56 56 0 0 1 112 0 a64 64 0 0 1 -128 0" stroke-width="2.6" />
+        </g>
+        <circle cx="194" cy="252" r="5" fill="#de4500" stroke="none" />
+        <path d="M130 170 L90 120" stroke-width="1.5" stroke-dasharray="4 4" />
+        <path d="M330 200 L318 140" stroke-width="1.5" stroke-dasharray="4 4" />
+        <path d="M150 410 L130 455" stroke-width="1.5" stroke-dasharray="4 4" />
+      </g>
+      <g class="labels" font-size="20" font-weight="600" fill="#3e4144" text-anchor="middle">
+        <text x="82" y="112">a</text>
+        <text x="316" y="132">b</text>
+        <text x="126" y="476">c</text>
+      </g>
+    </svg>
+  </div>
+  <figcaption>
+    Fig. 1 — <i>H. ingeniarius</i>, adult. Observed in Colorado.<br />
+    a. shell: portable workshop · b. eyestalks: always reviewing · c. foot: steady progress
+  </figcaption>
+</figure>
+
+<style>
+  .plate { flex: 1 1 340px; max-width: 440px; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .plate-frame {
+    aspect-ratio: 4 / 5;
+    background: var(--mustard);
+    border: 2px solid var(--slate);
+    box-shadow: 6px 6px 0 var(--slate);
+    overflow: hidden;
+  }
+  .plate-frame svg { width: 100%; height: 100%; display: block; }
+  .labels { font-family: var(--font-mono); }
+  figcaption { font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+</style>

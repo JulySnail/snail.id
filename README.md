@@ -1,30 +1,31 @@
 # snail.id
 
-Personal landing page for Matilda Snail.
-
-## Tech Stack
-
-- React 19.2.0
-- Vite 7.2.4
-- Modern CSS Grid Layout
+Personal site for Matilda Snail, built with [Astro](https://astro.build) and deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 
 ## Development
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:4321
+npm run build    # outputs to dist/
+npm run preview  # serves the built site
 ```
 
-Visit http://localhost:5173/
+## Adding a project
 
-## Build
+Projects live in `src/content/projects/`, one markdown file each:
 
-```bash
-npm run build
+```md
+---
+title: Bird feeder camera
+fig: 2                 # figure number, also sets the order
+summary: One line for the card and page description.
+draft: false           # true = card shows "Write-up coming", no page yet
+cover: ./bird-feeder.jpg   # optional, image next to the .md file
+coverAlt: The feeder on the balcony rail
+---
+
+The write-up, in markdown.
 ```
 
-Deploy the `dist/` folder to your web server.
-
-## Design
-
-Minimalist split-screen layout with warm neutral color palette. Responsive design that stacks on mobile devices.
+Published projects get a page at `/projects/<file-name>/`.

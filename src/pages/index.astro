@@ -1,0 +1,180 @@
+---
+import Base from '../layouts/Base.astro';
+import SnailPlate from '../components/SnailPlate.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.fig - b.data.fig);
+
+const notes = [
+  ['Habitat', 'Colorado'],
+  ['Role', 'Senior software engineer'],
+  ['Diet', 'Raspberry Pis, Arduinos'],
+  ['Pace', 'Measured'],
+];
+---
+<Base>
+  <div class="hero paper-bg">
+    <header class="wrap mono top">
+      <span>A field guide to snail.id</span>
+      <span class="plate-no">Plate No. 001</span>
+    </header>
+
+    <main class="wrap intro">
+      <SnailPlate />
+
+      <div class="notes">
+        <h1 class="heading name">Matilda Snail</h1>
+        <p class="latin">Helix ingeniarius</p>
+
+        <dl>
+          {notes.map(([term, value]) => (
+            <>
+              <dt class="mono">{term}</dt>
+              <dd>{value}</dd>
+            </>
+          ))}
+          <dt class="mono">Tracks</dt>
+          <dd class="tracks">
+            <a class="btn btn-orange" href="https://github.com/JulySnail">GitHub ↗</a>
+            <a class="btn btn-slate" href="https://www.linkedin.com/in/matilda-snail-422823287">LinkedIn ↗</a>
+          </dd>
+        </dl>
+      </div>
+    </main>
+
+    <a class="trail" href="#specimens" aria-label="Scroll to observed specimens">
+      <svg viewBox="0 0 1280 150" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20 60 C 160 10, 300 110, 480 70 S 760 20, 640 150" fill="none" stroke="#3e4144" stroke-width="4" stroke-dasharray="1 16" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+      </svg>
+    </a>
+  </div>
+
+  <section id="specimens" class="specimens">
+    <svg class="trail-end" width="20" height="96" viewBox="0 0 20 96" aria-hidden="true">
+      <path d="M10 0 V 70" fill="none" stroke="#d1bd19" stroke-width="4" stroke-dasharray="1 16" stroke-linecap="round" />
+      <g transform="translate(10 84) scale(0.11)">
+        <path d="M0 0 a8 8 0 0 1 16 0 a16 16 0 0 1 -32 0 a24 24 0 0 1 48 0 a32 32 0 0 1 -64 0 a40 40 0 0 1 80 0 a48 48 0 0 1 -96 0" fill="none" stroke="#de4500" stroke-width="16" stroke-linecap="round" />
+      </g>
+    </svg>
+
+    <div class="wrap">
+      <div class="specimens-head">
+        <h2 class="heading">Observed specimens</h2>
+        <p class="mono status">Catalog in progress</p>
+      </div>
+
+      <div class="cards">
+        {projects.map((p) => {
+          const Tag = p.data.draft ? 'article' : 'a';
+          return (
+            <Tag class:list={['card', { live: !p.data.draft }]} href={p.data.draft ? undefined : `/projects/${p.id}/`}>
+              {p.data.cover
+                ? <Image src={p.data.cover} alt={p.data.coverAlt ?? ''} class="card-img" widths={[400, 800]} sizes="(max-width: 700px) 100vw, 360px" />
+                : <div class="card-img placeholder mono">{p.data.draft ? 'Write-up coming' : 'No photo yet'}</div>}
+              <p class="mono fig">Fig. {p.data.fig}</p>
+              <h3 class="card-title">{p.data.title}</h3>
+              {p.data.summary && <p class="card-summary">{p.data.summary}</p>}
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap mono foot-row">
+      <span>snail.id</span>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* The paper sheet fills the first screen exactly; the trail sits pinned to its bottom edge. */
+  .hero { position: relative; z-index: 1; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+  .top { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; padding-block: 20px; }
+  .plate-no { color: var(--orange-text); }
+
+  .intro { flex: 1; display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-top: 8px; }
+  .notes { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; }
+  .name { font-size: clamp(52px, 7.2vw, 100px); }
+  .latin { margin: 12px 0 0; font-family: var(--font-head); font-style: italic; font-weight: 400; font-size: 30px; }
+
+  dl { margin: 32px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); border-top: 2px solid var(--slate); font-size: 18px; }
+  dt { padding: 15px 28px 15px 0; border-bottom: 1px solid var(--slate); align-self: stretch; display: flex; align-items: center; }
+  dd { margin: 0; padding: 15px 0; border-bottom: 1px solid var(--slate); }
+  .tracks { padding-block: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .trail { display: block; margin-top: 16px; }
+  .trail svg { display: block; width: 100%; height: 120px; }
+
+  /* On wide screens, shrink the plate on shorter windows so the trail stays in view on load. */
+  @media (min-width: 701px) {
+    /* The first screen drifts up slowly (see the script below) while the
+       slate section scrolls at full speed and gains on it. Phones scroll
+       normally, since their first screen is taller than the window. */
+    .hero { position: sticky; top: 0; will-change: transform; }
+    .notes { padding-block: 16px; }
+    .intro :global(.plate) { max-width: clamp(260px, calc((100svh - 300px) * 0.8), 440px); }
+    .name { font-size: clamp(52px, min(7.2vw, 11svh), 100px); }
+  }
+
+  /* The slate slides up over the fixed grid, casting a shadow onto it. */
+  .specimens { position: relative; z-index: 2; background: var(--slate); color: var(--cream); padding-bottom: 96px; box-shadow: 0 -22px 40px -14px rgba(0, 0, 0, 0.55); }
+  .trail-end { display: block; margin: 0 auto 32px; }
+  .specimens-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; justify-content: space-between; }
+  .specimens-head h2 { font-size: clamp(36px, 5vw, 48px); }
+  .status { margin: 0; color: var(--mustard); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 36px; }
+  .card { display: flex; flex-direction: column; gap: 12px; color: inherit; text-decoration: none; }
+  .card-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .placeholder { border: 2px dashed var(--mustard); color: var(--mustard); display: flex; align-items: center; justify-content: center; }
+  .fig { margin: 0; color: var(--mustard); }
+  .card-title { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: 26px; }
+  .card-summary { margin: 0; line-height: 1.5; }
+  .card.live:hover .card-title { color: var(--mustard); }
+
+  .foot { position: relative; z-index: 2; background: var(--slate); color: var(--cream); border-top: 1px solid rgba(235, 217, 153, 0.25); }
+  .foot-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding-block: 28px 40px; }
+
+  @media (max-width: 700px) {
+    .intro { gap: 36px; padding-top: 0; }
+    .trail svg { height: 90px; }
+  }
+</style>
+
+<script>
+  // Parallax: the first screen moves at 40% of scroll speed, so the slate
+  // section catches up and slides over it. Wide screens only, and off for
+  // people who prefer reduced motion.
+  const hero = document.querySelector<HTMLElement>('.hero');
+  const wide = window.matchMedia('(min-width: 701px)');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const SPEED = 0.4;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    if (!hero) return;
+    if (!wide.matches || calm.matches) {
+      hero.style.transform = '';
+      return;
+    }
+    const y = Math.min(window.scrollY, hero.offsetHeight);
+    hero.style.transform = `translateY(${-y * SPEED}px)`;
+  }
+
+  function request() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  wide.addEventListener('change', request);
+  calm.addEventListener('change', request);
+  update();
+</script>
