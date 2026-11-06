@@ -95,10 +95,12 @@ const notes = [
   .top { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; padding-block: 20px; }
   .plate-no { color: var(--orange-text); }
 
-  .intro { flex: 1; display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-top: 8px; }
+  /* Name column lines up with the top of the snail plate; the pair as a whole
+     stays centered in the first screen. */
+  .intro { flex: 1; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; align-content: center; padding-top: 8px; }
   .notes { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; }
   .name { font-size: clamp(52px, 7.2vw, 100px); }
-  .latin { margin: 12px 0 0; font-family: var(--font-head); font-style: italic; font-weight: 400; font-size: 30px; }
+  .latin { margin: 12px 0 0; font-family: var(--font-latin); font-style: italic; font-weight: 400; font-size: 30px; }
 
   dl { margin: 32px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); border-top: 2px solid var(--slate); font-size: 18px; }
   dt { padding: 15px 28px 15px 0; border-bottom: 1px solid var(--slate); align-self: stretch; display: flex; align-items: center; }
@@ -114,7 +116,7 @@ const notes = [
        slate section scrolls at full speed and gains on it. Phones scroll
        normally, since their first screen is taller than the window. */
     .hero { position: sticky; top: 0; will-change: transform; }
-    .notes { padding-block: 16px; }
+    .notes { padding-block: 0 16px; }
     .intro :global(.plate) { max-width: clamp(260px, calc((100svh - 300px) * 0.8), 440px); }
     .name { font-size: clamp(52px, min(7.2vw, 11svh), 100px); }
   }
