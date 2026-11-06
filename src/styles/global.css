@@ -6,10 +6,12 @@
   --cream: #ebd999;
   --line: rgba(62, 65, 68, 0.16);
   --line-fine: rgba(62, 65, 68, 0.07);
-  --font-head: 'Jost', sans-serif;
+  --font-head: 'Zilla Slab', serif;
+  --font-latin: 'Jost', sans-serif; /* italic Latin name */
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --font-body: 'Inter', system-ui, sans-serif;
-  --wrap: 1160px;
+  --wrap: 1080px; /* content width */
+  --gutter: clamp(24px, 7vw, 120px); /* side margin */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -28,7 +30,8 @@ body {
 a { color: inherit; }
 a:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
 
-.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-inline: 24px; }
+/* Side margins grow with the window so content never runs close to the edges. */
+.wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin: 0 auto; padding-inline: var(--gutter); }
 
 .mono {
   font-family: var(--font-mono);
