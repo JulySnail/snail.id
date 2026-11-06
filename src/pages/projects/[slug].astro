@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', (p) => !p.data.draft);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, fig, summary, cover, coverAlt } = project.data;
+---
+<Base title={`${title} — snail.id`} description={summary}>
+  <div class="paper sheet">
+    <header class="wrap mono top">
+      <a href="/#specimens">← Back to the field guide</a>
+      <span class="fig">Fig. {fig}</span>
+    </header>
+    <article class="wrap"><div class="entry">
+      <h1 class="heading">{title}</h1>
+      {summary && <p class="summary">{summary}</p>}
+      {cover && <Image src={cover} alt={coverAlt ?? ''} class="cover" widths={[800, 1400]} sizes="(max-width: 900px) 100vw, 760px" />}
+      <div class="prose"><Content /></div>
+    </div></article>
+  </div>
+  <footer class="foot">
+    <div class="wrap mono foot-row">
+      <span>snail.id</span>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .sheet { min-height: 100svh; padding-bottom: 96px; }
+  .top { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-block: 12px; }
+  .top a { text-decoration: none; padding-block: 8px; }
+  .top a:hover { color: var(--orange-text); }
+  .fig { color: var(--orange-text); }
+  .entry { max-width: 760px; padding-top: 48px; }
+  .entry h1 { font-size: clamp(44px, 7vw, 80px); }
+  .summary { font-size: 22px; line-height: 1.5; margin: 20px 0 0; }
+  .cover { width: 100%; height: auto; margin-top: 36px; border: 2px solid var(--slate); box-shadow: 6px 6px 0 var(--slate); }
+  .prose { margin-top: 40px; font-size: 18px; line-height: 1.7; }
+  .prose :global(h2) { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.02em; font-size: 30px; margin: 48px 0 12px; }
+  .prose :global(img) { max-width: 100%; height: auto; border: 2px solid var(--slate); }
+  .prose :global(code) { font-family: var(--font-mono); font-size: 0.9em; background: rgba(62, 65, 68, 0.1); padding: 2px 5px; }
+  .prose :global(pre) { background: var(--slate); color: var(--cream); padding: 20px; overflow-x: auto; }
+  .prose :global(pre code) { background: none; padding: 0; }
+  .foot { background: var(--slate); color: var(--cream); }
+  .foot-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding-block: 28px 40px; }
+</style>
